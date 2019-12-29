@@ -1,4 +1,9 @@
 const enemies = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+let gameScore = 0;
+
+//Populate Scoreboard Values
+let scoreboard = d3.select('.currentscore')
+    .text(gameScore)
 
 //Create SVG GameArea element
 let svg = d3.select('.svgcontainer')
@@ -83,8 +88,8 @@ function collisionHandler () {
         let yDistance = (playerY - enemyY) ** 2;
         let xDistance = (playerX - enemyX) ** 2;
         let distance = Math.sqrt(yDistance + xDistance);
-        if (distance < 48) {
-            collided = true;
+        if (distance < 45) {
+            gameScore = 0;
         }
     })
 }
@@ -93,5 +98,10 @@ function collisionHandler () {
 d3.interval(() => {
     update();
 }, 2000);
+
+d3.interval(() => {
+    gameScore += 1;
+    scoreboard.text(gameScore);
+}, 50)
 
 d3.timer(collisionHandler);
