@@ -106,10 +106,12 @@ d3.interval(() => {
     update();
 }, 2000);
 
+//ScoreBoard update interval
 d3.interval(() => {
     gameScore += 1;
     scoreboard.text(gameScore);
     highScoreboard.text(highScore);
 }, 50)
 
+//Collision handler to be run ever second
 d3.timer(collisionHandler);
