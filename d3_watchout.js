@@ -1,12 +1,10 @@
 let testData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-const width = 750;
-const height = 600;
 
-//Create SVG element
+//Create SVG GameArea element
 let svg = d3.select('.svgcontainer')
     .append('svg')
-    .attr('width', width)
-    .attr('height', height);
+        .attr('width',750)
+        .attr('height', 600);
 
 //Create player SVG element
 let circleData = [{
@@ -41,22 +39,17 @@ let mappedData = testData.map(item => {
     }
 });
 
-
 //Display intial enemies 
 svg.selectAll('svg')
     .data(mappedData)
     .enter()
     .append('rect')
-    .attr('x', function(data) {
-        return data.x;
-    })
-    .attr('y', function(data) {
-        return data.y;
-    })
-    .attr('width', 25)
-    .attr('height', 25)
-    .attr('fill', 'indianred')
-    .attr('stroke', 'black');
+        .attr('x', data => data.x)
+        .attr('y', data => data.y)
+        .attr('width', 25)
+        .attr('height', 25)
+        .attr('fill', 'indianred')
+        .attr('stroke', 'black');
 
 
 function update() {
@@ -70,12 +63,8 @@ function update() {
     d3.select('svg').selectAll('rect')
         .data(newMappedData)
         .transition().duration(1500)
-        .attr('x', function(data) {
-            return data.x;
-        })
-        .attr('y', function(data) {
-            return data.y
-        })
+            .attr('x', data => data.x)
+            .attr('y', data => data.y);
 
 }
 
