@@ -23,12 +23,13 @@ svg.selectAll('svg')
         .attr('r', '18')
         .attr('fill', 'black')
         .attr('stroke', 'white')
-    .call(d3.drag().on('drag', dragmove));
+    .call(d3.drag().on('drag', drag));
 
-function dragmove(d) {
+//Create DragHandler
+function drag(d) {
     d3.select(this)
-    .attr('cx', d.x = d3.event.x)
-    .attr('cy', d.y = d3.event.y);
+        .attr('cx', d.x = d3.event.x)
+        .attr('cy', d.y = d3.event.y);
 }
 
 //Render random starting positions
