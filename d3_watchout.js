@@ -9,23 +9,27 @@ let svg = d3.select('.svgcontainer')
     .attr('height', height);
 
 //Create player SVG element
-d3.select('svg')
+let circleData = [{
+    x: 390,
+    y: 300
+}];
+svg.selectAll('svg')
+    .data(circleData)
+    .enter()
     .append('circle')
-    .attr('class', 'player')
-    .attr('cx', '390')
-    .attr('cy', '300')
-    .attr('r', '18')
-    .attr('fill', 'black')
-    .attr('stroke', 'white');
+        .attr('class', 'player')
+        .attr('cx', d => d.x)
+        .attr('cy', d => d.y)
+        .attr('r', '18')
+        .attr('fill', 'black')
+        .attr('stroke', 'white')
+    .call(d3.drag().on('drag', dragmove));
 
-//Drag handler
-function dragged () {
-    
+function dragmove(d) {
+    d3.select(this)
+    .attr('cx', d.x = d3.event.x)
+    .attr('cy', d.y = d3.event.y);
 }
-
-d3.select('.player').call(d3.drag().on('drag', dragged));
-
-
 
 //Render random starting positions
 let mappedData = testData.map(item => {
