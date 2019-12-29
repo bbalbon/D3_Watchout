@@ -1,4 +1,4 @@
-let testData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+let testData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 const width = 750;
 const height = 600;
 
@@ -8,14 +8,25 @@ let svg = d3.select('.svgcontainer')
     .attr('width', width)
     .attr('height', height);
 
+//Create player SVG element
+d3.select('svg')
+    .append('circle')
+    .attr('cx', '200')
+    .attr('cy', '50')
+    .attr('r', '18')
+    .attr('fill', 'black')
+    .attr('stroke', 'white');
+
 let mappedData = testData.map(item => {
     return {
         value: item,
         x: Math.random() * 700,
         y: Math.random() * 550
     }
-})
+});
 
+
+//Display intial enemies 
 svg.selectAll('svg')
     .data(mappedData)
     .enter()
@@ -55,14 +66,3 @@ function update() {
 d3.interval(() => {
     update();
 }, 2000);
-
-
-// const width = 50;
-// const height = 50;
-
-// let svg = d3.select('.svgcontainer')
-//    .append('svg')
-//    .attr('width', width)
-//    .attr('height', height);
-
-// console.log(svg);
