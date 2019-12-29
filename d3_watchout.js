@@ -11,12 +11,23 @@ let svg = d3.select('.svgcontainer')
 //Create player SVG element
 d3.select('svg')
     .append('circle')
-    .attr('cx', '200')
-    .attr('cy', '50')
+    .attr('class', 'player')
+    .attr('cx', '390')
+    .attr('cy', '300')
     .attr('r', '18')
     .attr('fill', 'black')
     .attr('stroke', 'white');
 
+//Drag handler
+function dragged () {
+    
+}
+
+d3.select('.player').call(d3.drag().on('drag', dragged));
+
+
+
+//Render random starting positions
 let mappedData = testData.map(item => {
     return {
         value: item,
