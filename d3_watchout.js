@@ -1,4 +1,4 @@
-let testData = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+const enemies = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
 
 //Create SVG GameArea element
 let svg = d3.select('.svgcontainer')
@@ -7,7 +7,7 @@ let svg = d3.select('.svgcontainer')
         .attr('height', 600);
 
 //Create player SVG element
-let circleData = [{
+const circleData = [{
     x: 390,
     y: 300
 }];
@@ -31,7 +31,7 @@ function drag(d) {
 }
 
 //Render random starting positions
-let mappedData = testData.map(item => {
+let mappedData = enemies.map(item => {
     return {
         value: item,
         x: Math.random() * 700,
@@ -68,6 +68,30 @@ function update() {
 
 }
 
+//Collision Handler
+function collisionHandler () {
+    const enemies = mappedData;
+    const player = circleData;
+    let collided = false;
+    let playerX = player['0'].x;
+    let playerY = player['0'].y;
+
+
+    enemies.forEach(enemy => {
+        let enemyX = enemy.x;
+        let enemyY = enemy.y;
+        let yDistance = (playerY - enemyY) ** 2;
+        let xDistance = (playerX - enemyX) ** 2;
+        let distance = Math.sqrt(yDistance + xDistance);
+        if (distance < 48) {
+            collided = true;
+        }
+    })
+}
+
+//Interval for the game to be played on
 d3.interval(() => {
     update();
 }, 2000);
+
+d3.timer(collisionHandler);
