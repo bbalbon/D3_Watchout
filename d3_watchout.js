@@ -7,7 +7,6 @@ let scoreboard = d3.select('.currentscore')
     .text(gameScore);
 
 let highScoreboard = d3.select('.highscore')
-    .text(gameScore);
 
 //Create SVG GameArea element
 let svg = d3.select('.svgcontainer')
@@ -62,7 +61,6 @@ svg.selectAll('svg')
 
 
 function update() {
-
     let newMappedData = mappedData.map(item => {
         item.x = Math.random() * 700
         item.y = Math.random() * 550
@@ -73,18 +71,15 @@ function update() {
         .data(newMappedData)
         .transition().duration(1500)
             .attr('x', data => data.x)
-            .attr('y', data => data.y);
-
+            .attr('y', data => data.y)
 }
 
 //Collision Handler
 function collisionHandler () {
     const enemies = mappedData;
     const player = circleData;
-    let collided = false;
     let playerX = player['0'].x;
     let playerY = player['0'].y;
-
 
     enemies.forEach(enemy => {
         let enemyX = enemy.x;
