@@ -59,7 +59,7 @@ svg.selectAll('svg')
         .attr('fill', 'indianred')
         .attr('stroke', 'black');
 
-
+//Update function on interval
 function update() {
     let newMappedData = mappedData.map(item => {
         item.x = Math.random() * 700
